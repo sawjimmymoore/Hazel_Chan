@@ -4,6 +4,13 @@ import { motion } from "framer-motion";
 import type { Project } from "@/data/content";
 
 export default function ProjectCard({ project, index = 0 }: { project: Project; index?: number }) {
+  const thumbnail =
+    project.cover.kind === "image" && project.cover.src
+      ? project.cover.src
+      : project.gallery && project.gallery.length > 0
+      ? project.gallery[0].src
+      : null;
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -17,14 +24,14 @@ export default function ProjectCard({ project, index = 0 }: { project: Project; 
             className="relative aspect-[16/9] rounded-lg overflow-hidden mb-5"
             style={{
               background:
-                project.cover.kind === "gradient"
+                !thumbnail && project.cover.kind === "gradient"
                   ? `linear-gradient(135deg, ${project.cover.gradientFrom}, ${project.cover.gradientTo})`
-                  : undefined,
+                  : "#0c0a13",
             }}
           >
-            {project.cover.kind === "image" && project.cover.src && (
+            {thumbnail && (
               <img
-                src={project.cover.src}
+                src={thumbnail}
                 alt={project.title}
                 className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
