@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useParams, Navigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, ExternalLink, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowLeft, ExternalLink, ChevronLeft, ChevronRight, Maximize2, X } from "lucide-react";
 import { PROJECTS, type Project } from "@/data/content";
 
 export default function ProjectDetail() {
@@ -159,78 +159,186 @@ function ProjectCover({ project }: { project: Project }) {
       : [];
 
   const [index, setIndex] = useState(0);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
   const hasMultiple = images.length > 1;
 
   const goNext = () => setIndex((i) => (i + 1) % images.length);
   const goPrev = () => setIndex((i) => (i - 1 + images.length) % images.length);
 
+  // Close on Escape, navigate with arrow keys while lightbox is open
+  useEffect(() => {
+    if (!lightboxOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setLightboxOpen(false);
+      if (e.key === "ArrowRight" && hasMultiple) goNext();
+      if (e.key === "ArrowLeft" && hasMultiple) goPrev();
+    };
+    window.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [lightboxOpen, hasMultiple]);
+
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.98 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.6, delay: 0.1 }}
-      className="relative aspect-[16/8] rounded-2xl overflow-hidden mb-14 border border-primary-500/20"
-      style={{
-        background:
-          images.length === 0 && project.cover.kind === "gradient"
-            ? `linear-gradient(135deg, ${project.cover.gradientFrom}, ${project.cover.gradientTo})`
-            : "#15121f",
-      }}
-    >
-      {images.length > 0 && (
-        <>
-          <AnimatePresence mode="wait" initial={false}>
+    <>
+      <motion.div
+        initial={{ opacity: 0, scale: 0.98 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.6, delay: 0.1 }}
+        className="relative aspect-[16/8] rounded-2xl overflow-hidden mb-14 border border-primary-500/20"
+        style={{
+          background:
+            images.length === 0 && project.cover.kind === "gradient"
+              ? `linear-gradient(135deg, ${project.cover.gradientFrom}, ${project.cover.gradientTo})`
+              : "#0c0a13",
+        }}
+      >
+        {images.length > 0 && (
+          <>
+            <button
+              onClick={() => setLightboxOpen(true)}
+              aria-label="Expand image"
+              className="absolute inset-0 w-full h-full cursor-zoom-in group"
+            >
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.img
+                  key={images[index].src}
+                  src={images[index].src}
+                  alt={images[index].caption ?? project.title}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.35 }}
+                  className="absolute inset-0 h-full w-full object-contain"
+                />
+              </AnimatePresence>
+
+              <div className="absolute inset-0 bg-ink-900/0 group-hover:bg-ink-900/30 transition-colors flex items-center justify-center">
+                <div className="opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-2 rounded-full bg-ink-900/80 px-4 py-2 text-[12.5px] text-parchment-100">
+                  <Maximize2 size={14} /> Click to expand
+                </div>
+              </div>
+            </button>
+
+            {images[index].caption && (
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-ink-900/90 to-transparent px-6 pt-10 pb-5 pointer-events-none">
+                <p className="text-[13px] text-parchment-100">{images[index].caption}</p>
+              </div>
+            )}
+
+            {hasMultiple && (
+              <>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    goPrev();
+                  }}
+                  aria-label="Previous image"
+                  className="absolute left-3 top-1/2 -translate-y-1/2 flex items-center justify-center h-9 w-9 rounded-full bg-ink-900/60 text-parchment-100 hover:bg-ink-900/85 transition-colors"
+                >
+                  <ChevronLeft size={18} />
+                </button>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    goNext();
+                  }}
+                  aria-label="Next image"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center justify-center h-9 w-9 rounded-full bg-ink-900/60 text-parchment-100 hover:bg-ink-900/85 transition-colors"
+                >
+                  <ChevronRight size={18} />
+                </button>
+
+                <div className="absolute top-4 right-4 flex gap-1.5">
+                  {images.map((img, i) => (
+                    <button
+                      key={img.src}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setIndex(i);
+                      }}
+                      aria-label={`Go to image ${i + 1}`}
+                      className={`h-1.5 rounded-full transition-all ${
+                        i === index ? "w-6 bg-primary-400" : "w-1.5 bg-parchment-100/40"
+                      }`}
+                    />
+                  ))}
+                </div>
+              </>
+            )}
+          </>
+        )}
+      </motion.div>
+
+      <AnimatePresence>
+        {lightboxOpen && images.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            onClick={() => setLightboxOpen(false)}
+            className="fixed inset-0 z-50 bg-ink-900/95 backdrop-blur-sm flex items-center justify-center p-6"
+          >
+            <button
+              onClick={() => setLightboxOpen(false)}
+              aria-label="Close"
+              className="absolute top-5 right-5 flex items-center justify-center h-10 w-10 rounded-full bg-ink-800/80 text-parchment-100 hover:bg-ink-800 transition-colors"
+            >
+              <X size={20} />
+            </button>
+
             <motion.img
               key={images[index].src}
               src={images[index].src}
               alt={images[index].caption ?? project.title}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.35 }}
-              className="absolute inset-0 h-full w-full object-cover"
+              initial={{ scale: 0.96, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.96, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              onClick={(e) => e.stopPropagation()}
+              className="max-h-[88vh] max-w-[92vw] object-contain rounded-lg"
             />
-          </AnimatePresence>
 
-          {images[index].caption && (
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-ink-900/90 to-transparent px-6 pt-10 pb-5">
-              <p className="text-[13px] text-parchment-100">{images[index].caption}</p>
-            </div>
-          )}
-
-          {hasMultiple && (
-            <>
-              <button
-                onClick={goPrev}
-                aria-label="Previous image"
-                className="absolute left-3 top-1/2 -translate-y-1/2 flex items-center justify-center h-9 w-9 rounded-full bg-ink-900/60 text-parchment-100 hover:bg-ink-900/85 transition-colors"
+            {images[index].caption && (
+              <p
+                onClick={(e) => e.stopPropagation()}
+                className="absolute bottom-6 left-1/2 -translate-x-1/2 text-[13px] text-parchment-200 bg-ink-900/70 px-4 py-2 rounded-full max-w-[90vw] text-center"
               >
-                <ChevronLeft size={18} />
-              </button>
-              <button
-                onClick={goNext}
-                aria-label="Next image"
-                className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center justify-center h-9 w-9 rounded-full bg-ink-900/60 text-parchment-100 hover:bg-ink-900/85 transition-colors"
-              >
-                <ChevronRight size={18} />
-              </button>
+                {images[index].caption}
+              </p>
+            )}
 
-              <div className="absolute top-4 right-4 flex gap-1.5">
-                {images.map((img, i) => (
-                  <button
-                    key={img.src}
-                    onClick={() => setIndex(i)}
-                    aria-label={`Go to image ${i + 1}`}
-                    className={`h-1.5 rounded-full transition-all ${
-                      i === index ? "w-6 bg-primary-400" : "w-1.5 bg-parchment-100/40"
-                    }`}
-                  />
-                ))}
-              </div>
-            </>
-          )}
-        </>
-      )}
-    </motion.div>
+            {hasMultiple && (
+              <>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    goPrev();
+                  }}
+                  aria-label="Previous image"
+                  className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 flex items-center justify-center h-11 w-11 rounded-full bg-ink-800/70 text-parchment-100 hover:bg-ink-800 transition-colors"
+                >
+                  <ChevronLeft size={20} />
+                </button>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    goNext();
+                  }}
+                  aria-label="Next image"
+                  className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 flex items-center justify-center h-11 w-11 rounded-full bg-ink-800/70 text-parchment-100 hover:bg-ink-800 transition-colors"
+                >
+                  <ChevronRight size={20} />
+                </button>
+              </>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }
