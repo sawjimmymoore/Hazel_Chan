@@ -28,6 +28,7 @@ export interface Project {
   body: string[];
   links?: { label: string; href: string }[];
   featured?: boolean;
+  gallery?: { src: string; caption?: string }[];
 }
 
 export const SITE = {
@@ -85,7 +86,7 @@ export const PROJECTS: Project[] = [
   {
     slug: "zebra-camp-pitch-2026",
     title: "Zebra Camp & Pitch International 2026",
-    category: "competition",
+    category: "educational",
     org: "Fen-i · Future Education Network International",
     role: "Educator & Program Designer",
     dates: "Jun – Sep 2026",
@@ -93,7 +94,7 @@ export const PROJECTS: Project[] = [
     summary:
       "Southeast Asia's longest-running youth entrepreneurship pitch competition — 400+ participants, 8+ countries, 3 days of mentoring, coaching, and a live grand final in Bangkok.",
     tags: ["Entrepreneurship", "Youth Programs", "Curriculum Design", "Event Coordination"],
-    cover: { kind: "gradient", gradientFrom: "#1d1830", gradientTo: "#7456c9" },
+    cover: { kind: "image", src: "/images/projects/zebra-seed-welcome.jpg" },
     featured: true,
     journey: [
       { label: "Register", detail: "Schools and individual students (ages 7–22) apply solo or in teams across 6 industry tracks." },
@@ -111,8 +112,12 @@ export const PROJECTS: Project[] = [
       "Zebra Camp & Pitch International is Fen-i's flagship youth entrepreneurship event, now in its 4th consecutive year as Southeast Asia's longest-running pitch competition for students aged 7 to 22.",
       "As Educator and Program Designer, I help shape the self-directed learning track, the on-the-ground camp agenda, and the Z.E.B.R.A. scoring framework (Z-Edge, Engagement, Business Model, Relevance, Attitude & Ability) that judges use across the three-day Bangkok finale.",
       "The 2026 edition runs September 4–6 in Bangkok, bringing together students, schools, mentors, and industry judges across six tracks: Entrepreneurship, AI & Technology, Sciencepreneurship, Influencer & Digital Storytelling, Artpreneurship, and Hospitality & Tourism.",
+      "As part of the Zebra Seed for Change roadshow, I served as MC and Project Manager for the school visit at Wattanawittayalai Academy — leading event flow on stage and coordinating logistics, materials, and transportation for the outreach session.",
     ],
     links: [{ label: "Visit Zebra Camp & Pitch site", href: "https://fenispace.com/zebra" }],
+    gallery: [
+      { src: "/images/projects/zebra-seed-welcome.jpg", caption: "Zebra Seed for Change International 2026 — Wattanawittayalai Academy roadshow" },
+    ],
   },
   {
     slug: "young-ceo-programme-2026",
@@ -143,6 +148,9 @@ export const PROJECTS: Project[] = [
       "The Young CEO Programme is a 4-week academy I help design and deliver for two age groups — 7 to 12 and 13 to 18 — each following a path suited to their stage of development.",
       "Group 1 builds personal strengths, budgeting basics, AI literacy, and a first business idea through hands-on prototyping. Group 2 goes deeper — Ikigai, SWOT analysis, full Design Thinking, an investor-ready MVP, and a 3–5 minute investor-style pitch with live Q&A.",
       "Every week closes with structured reflection and 1-on-1 mentor consultations, building toward Week 4's CEO on Stage final presentation and farewell ceremony — complete with certificates, a company field trip, and parents in the audience.",
+    ],
+    gallery: [
+      { src: "/images/projects/young-ceo-journey-outcomes.jpg", caption: "4-week programme agenda and learning outcomes" },
     ],
   },
   {
@@ -215,6 +223,12 @@ export const PROJECTS: Project[] = [
     body: [
       "The RIC Student Union is dedicated to organizing events, supporting student clubs, and promoting cultural exchange among the diverse student body.",
       "Their initiatives aim to build unity, leadership, and engagement across the college.",
+      "As part of the 2024 Freshman Orientation, I was invited as panel moderator for the orientation panel, leading a discussion on personal branding — what it is, the steps to build one, and practical tips for incoming students.",
+      "Across the year, the Student Union ran three major workstreams: Gala Night (decor, catering, venue, invitations, social promotion, and budget allocation), Special Days' Events (Songkran, Valentine's Day, Loy Krathong with games, cocktails, and club collaborations), and Freshman Orientation (agenda planning, inviting speakers, and MC coordination).",
+    ],
+    gallery: [
+      { src: "/images/projects/ric-panel-moderator.jpg", caption: "Panel Moderator — Orientation Event Panel (2024)" },
+      { src: "/images/projects/ric-projects-overview.jpg", caption: "RIC Student Union Projects — Gala Night, Special Days' Events, Freshman Orientation" },
     ],
   },
   {

@@ -134,6 +134,34 @@ export default function ProjectDetail() {
           </div>
         )}
 
+        {project.gallery && project.gallery.length > 0 && (
+          <div className="mb-16">
+            <p className="eyebrow mb-4">Gallery</p>
+            <h2 className="text-2xl md:text-3xl font-semibold text-parchment-100 mb-10">
+              A closer look
+            </h2>
+            <div className="grid md:grid-cols-2 gap-6">
+              {project.gallery.map((img, i) => (
+                <motion.figure
+                  key={img.src}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-40px" }}
+                  transition={{ duration: 0.5, delay: i * 0.08 }}
+                  className="rounded-xl overflow-hidden border border-primary-500/20 bg-ink-800/50"
+                >
+                  <img src={img.src} alt={img.caption ?? project.title} className="w-full h-auto block" />
+                  {img.caption && (
+                    <figcaption className="text-[12.5px] text-muted-foreground px-4 py-3">
+                      {img.caption}
+                    </figcaption>
+                  )}
+                </motion.figure>
+              ))}
+            </div>
+          </div>
+        )}
+
         <div className="mt-24 pt-10 border-t border-primary-500/10 flex items-center justify-between flex-wrap gap-4">
           <Link
             to="/projects"
