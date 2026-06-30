@@ -29,6 +29,7 @@ export interface Project {
   links?: { label: string; href: string }[];
   featured?: boolean;
   gallery?: { src: string; caption?: string }[];
+  highlight?: { title: string; text: string };
 }
 
 export const SITE = {
@@ -45,7 +46,7 @@ export const SITE = {
   tagline: "Background in social media marketing, branding and communication",
   role: "Educator & Program Designer",
   location: "Bangkok, Thailand",
-  email: "ayechanpwintphyuu@gmail.com",
+  email: "hazelchan732@gmail.com",
   phone: "(+66) 634627828",
   org: "Fen-i (Future Education Network International)",
   linkedin:
@@ -112,8 +113,11 @@ export const PROJECTS: Project[] = [
       "Zebra Camp & Pitch International is Fen-i's flagship youth entrepreneurship event, now in its 4th consecutive year as Southeast Asia's longest-running pitch competition for students aged 7 to 22.",
       "As Educator and Program Designer, I help shape the self-directed learning track, the on-the-ground camp agenda, and the Z.E.B.R.A. scoring framework (Z-Edge, Engagement, Business Model, Relevance, Attitude & Ability) that judges use across the three-day Bangkok finale.",
       "The 2026 edition runs September 4–6 in Bangkok, bringing together students, schools, mentors, and industry judges across six tracks: Entrepreneurship, AI & Technology, Sciencepreneurship, Influencer & Digital Storytelling, Artpreneurship, and Hospitality & Tourism.",
-      "As part of the Zebra Seed for Change roadshow, I served as MC and Project Manager for the school visit at Wattanawittayalai Academy — leading event flow on stage and coordinating logistics, materials, and transportation for the outreach session.",
     ],
+    highlight: {
+      title: "MC & Project Manager — Wattanawittayalai Academy Roadshow",
+      text: "As part of the Zebra Seed for Change roadshow, I served as MC and Project Manager for the school visit at Wattanawittayalai Academy — leading event flow on stage and coordinating logistics, materials, and transportation for the outreach session.",
+    },
     links: [{ label: "Visit Zebra Camp & Pitch site", href: "https://fenispace.com/zebra" }],
     gallery: [
       { src: "/images/projects/zebra-seed-welcome.jpg", caption: "Zebra Seed for Change International 2026 — Wattanawittayalai Academy roadshow" },

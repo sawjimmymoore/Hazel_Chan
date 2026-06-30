@@ -94,6 +94,13 @@ export default function ProjectDetail() {
               ))}
             </div>
           )}
+
+          {project.highlight && (
+            <div className="mt-8 rounded-xl border border-primary-500/25 bg-primary-500/[0.06] p-6">
+              <p className="eyebrow mb-2 text-primary-400">{project.highlight.title}</p>
+              <p className="text-[14.5px] text-parchment-200 leading-relaxed">{project.highlight.text}</p>
+            </div>
+          )}
         </div>
 
         {project.journey && (
