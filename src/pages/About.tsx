@@ -13,7 +13,7 @@ export default function About() {
           transition={{ duration: 0.6 }}
           className="text-center max-w-3xl mx-auto mb-16"
         >
-          <h1 className="text-4xl md:text-5xl font-bold text-parchment-100 mb-6">About Me</h1>
+          <h1 className="text-4xl md:text-5xl font-bold text-parchment-100 mb-6">About</h1>
           <p className="text-lg text-muted-foreground leading-relaxed">{SITE.aboutIntro}</p>
         </motion.div>
 
