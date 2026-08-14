@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { GraduationCap, Calendar, MapPin, ExternalLink, FileText, ChevronLeft, ChevronRight, Download } from "lucide-react";
-import { EDUCATION, GENERAL_STUDY, CERTIFICATES, REFERENCES, SITE, type EducationItem } from "@/data/content";
+import { GraduationCap, Calendar, MapPin, ExternalLink, FileText, ChevronLeft, ChevronRight } from "lucide-react";
+import { EDUCATION, GENERAL_STUDY, CERTIFICATES, type EducationItem } from "@/data/content";
 
 function isPdf(path: string) {
   return path.toLowerCase().endsWith(".pdf");
@@ -160,16 +160,7 @@ export default function Credentials() {
           </h1>
         </motion.div>
 
-        <div className="flex justify-center mb-16">
-          <a
-            href={SITE.resumeFile}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-2 rounded-full bg-primary-500 px-6 py-3 text-[13px] font-semibold text-on-primary hover:bg-primary-400 transition-colors"
-          >
-            <Download size={14} /> Download full résumé
-          </a>
-        </div>
+        {/* Résumé download temporarily hidden until updated file is provided */}
 
         {/* Academic Background */}
         <div className="mb-20">
@@ -208,7 +199,7 @@ export default function Credentials() {
         </div>
 
         {/* Certifications carousel */}
-        <div className="mb-24">
+        <div>
           <motion.h3
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -219,33 +210,6 @@ export default function Credentials() {
             Certifications
           </motion.h3>
           <CertCarousel />
-        </div>
-
-        {/* References */}
-        <div>
-          <h2 className="text-3xl font-semibold text-parchment-100 mb-10 text-center">References</h2>
-          <div className="grid sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
-            {REFERENCES.map((ref, i) => (
-              <motion.div
-                key={ref.email}
-                initial={{ opacity: 0, y: 14 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.4, delay: i * 0.06 }}
-                className="rounded-xl border border-primary-500/20 bg-ink-800/40 p-5"
-              >
-                <p className="font-semibold text-parchment-100 mb-1">{ref.name}</p>
-                <p className="text-[13px] text-muted-foreground mb-0.5">{ref.title}</p>
-                <p className="text-[13px] text-muted-foreground/70 mb-3">{ref.org}</p>
-                <a
-                  href={`mailto:${ref.email}`}
-                  className="text-[12.5px] text-primary-400 hover:text-primary-300 transition-colors"
-                >
-                  {ref.email}
-                </a>
-              </motion.div>
-            ))}
-          </div>
         </div>
       </div>
     </div>

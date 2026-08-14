@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
-import { Mail, MapPin, Download } from "lucide-react";
+import { Mail, MapPin } from "lucide-react";
 import { SITE, PROJECTS } from "@/data/content";
 import ProjectCard from "@/components/ProjectCard";
 
@@ -102,13 +102,7 @@ export default function Home() {
               >
                 Get In Touch
               </Link>
-              <a
-                href={SITE.resumeFile}
-                download="Hazel_Resume.pdf"
-                className="px-8 py-3.5 text-base font-medium w-full sm:w-52 rounded-lg bg-ink-800 border border-primary-500/30 text-parchment-100 hover:border-primary-400 transition-colors text-center inline-flex items-center justify-center gap-2"
-              >
-                Download Resume <Download size={16} />
-              </a>
+              {/* Résumé download temporarily hidden until updated file is provided */}
             </motion.div>
           </motion.div>
         </div>
