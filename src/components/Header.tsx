@@ -100,20 +100,12 @@ export default function Header() {
           </div>
 
           <NavLink
-            to="/experience"
-            className={({ isActive }) =>
-              `${linkBase} ${isActive ? "text-header-text" : "text-header-muted hover:text-header-text"}`
-            }
-          >
-            Experience
-          </NavLink>
-          <NavLink
             to="/credentials"
             className={({ isActive }) =>
               `${linkBase} ${isActive ? "text-header-text" : "text-header-muted hover:text-header-text"}`
             }
           >
-            Credentials
+            Milestones
           </NavLink>
           <NavLink
             to="/about"
@@ -162,8 +154,7 @@ export default function Header() {
                 { label: "Projects — All Work", href: "/projects" },
                 { label: "Competition Projects", href: "/projects?category=competition" },
                 { label: "Educational Projects", href: "/projects?category=educational" },
-                { label: "Experience", href: "/experience" },
-                { label: "Credentials", href: "/credentials" },
+                { label: "Milestones", href: "/credentials" },
                 { label: "About", href: "/about" },
                 { label: "Contact", href: "/contact" },
               ].map((item) => (

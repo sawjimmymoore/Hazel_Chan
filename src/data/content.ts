@@ -71,9 +71,8 @@ export const SITE = {
 export const NAV = [
   { label: "Home", href: "/" },
   { label: "Projects", href: "/projects" },
-  { label: "Experience", href: "/experience" },
-  { label: "Credentials", href: "/credentials" },
-  { label: "About", href: "/about" },
+  { label: "Milestones", href: "/credentials" },
+  { label: "Meet Hazel", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];
 
