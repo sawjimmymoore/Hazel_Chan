@@ -157,6 +157,65 @@ export const PROJECTS: Project[] = [
     ],
   },
   {
+    slug: "bird-english-social-development-2026",
+    title: "English & Social Development Program",
+    category: "educational",
+    org: "Burma Institute for Rural Development (BIRD)",
+    role: "Main Teacher & Course Designer",
+    dates: "2026 — in progress until end of September",
+    location: "Online · Instructed in Burmese & English",
+    summary:
+      "A 3-month online English training course paired with social and personal development topics, built and taught with the Burma Institute for Rural Development Organization — 2-hour sessions each week, facilitated alongside BIRD members.",
+    tags: [
+      "English Training",
+      "Curriculum Design",
+      "Public Speaking",
+      "Academic Writing",
+      "Bilingual Instruction",
+    ],
+    cover: { kind: "image", src: "/images/projects/bird-english-program-2026.jpeg" },
+    featured: true,
+    journey: [
+      {
+        label: "English Speaking & Listening",
+        detail: "Activity-led sessions that get learners speaking and listening with confidence from week one.",
+      },
+      {
+        label: "Grammar Foundations",
+        detail: "Core grammar taught bilingually, so structure is understood rather than memorised.",
+      },
+      {
+        label: "Business Presentation & Public Speaking",
+        detail: "Business project presentations and practical public speaking tactics for real audiences.",
+      },
+      {
+        label: "English Self-Learning Journey",
+        detail: "Building the habits, resources, and routines learners need to keep improving after the course ends.",
+      },
+      {
+        label: "Essay Types & Academic Writing",
+        detail: "Essay formats and academic writing skills development for study and scholarship applications.",
+      },
+    ],
+    stats: [
+      { value: "3 mo", label: "Course length" },
+      { value: "2 hrs", label: "Per weekly session" },
+      { value: "5", label: "Program categories" },
+      { value: "2", label: "Languages of instruction" },
+    ],
+    body: [
+      "An online English training course delivered together with social and personal development topics, in partnership with the Burma Institute for Rural Development (BIRD) Organization. The course is mainly instructed in both Burmese and English so learners can build on the language they already have.",
+      "As main teacher, I prepared the course as a 3-month training with one 2-hour session per week. The class is also facilitated by BIRD members, and is currently in progress until the end of September.",
+      "The program covers five categories: English speaking and listening activities; grammar foundations; business project presentation and public speaking tactics; English self-learning journey development; and essay types and academic writing skills development.",
+    ],
+    gallery: [
+      {
+        src: "/images/projects/bird-english-program-2026.jpeg",
+        caption: "English & Social Development Program 2026 with BIRD Organization",
+      },
+    ],
+  },
+  {
     slug: "p2a-global-sustainable-program",
     title: "Global Sustainable Program (P2A)",
     category: "competition",
